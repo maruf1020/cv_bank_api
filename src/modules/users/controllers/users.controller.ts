@@ -1,4 +1,4 @@
-// src/users/controllers/users.controller.ts
+// src/modules/users/controllers/users.controller.ts
 import {
   Controller,
   Get,

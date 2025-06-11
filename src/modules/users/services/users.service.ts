@@ -1,4 +1,4 @@
-// src/users/services/users.service.ts
+// src/modules/users/services/users.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import { UsersRepository } from '../repositories/users.repository';

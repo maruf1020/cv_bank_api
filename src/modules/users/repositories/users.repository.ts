@@ -1,4 +1,4 @@
-// src/users/repositories/users.repository.ts
+// src/modules/users/repositories/users.repository.ts
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { DeleteResult, Repository } from 'typeorm';

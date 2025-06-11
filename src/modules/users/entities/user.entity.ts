@@ -1,4 +1,4 @@
-// src/users/entities/user.entity.ts
+// src/modules/users/entities/user.entity.ts
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity()
