@@ -1,5 +1,9 @@
 // src/modules/users/services/users.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { User } from '../entities/user.entity';
 import { UsersRepository } from '../repositories/users.repository';
 import { DeleteResult } from 'typeorm';
@@ -23,6 +27,14 @@ export class UsersService {
   }
 
   async create(userCreateDto: UserCreateDto): Promise<User> {
+    // Check if email already exists
+    const existingUser = await this.usersRepository.findByEmail(
+      userCreateDto.email,
+    );
+    if (existingUser) {
+      throw new ConflictException('Email already in use');
+    }
+
     const user = this.usersRepository.create(userCreateDto);
     return this.usersRepository.save(user);
   }
