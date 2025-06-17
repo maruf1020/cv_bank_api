@@ -1,5 +1,4 @@
-// File: src/modules/applicant/entities/applicant.entity.ts
-
+// src/modules/applicant/entities/applicant.entity.ts
 import {
   Entity,
   Column,
@@ -7,203 +6,251 @@ import {
   OneToMany,
   CreateDateColumn,
   UpdateDateColumn,
+  OneToOne,
+  JoinColumn,
 } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsDateString, IsEmail, IsEnum, IsOptional, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsEnum,
+  IsOptional,
+  IsString,
+  IsISO8601,
+} from 'class-validator';
 import { EmergencyContact } from './emergency-contact.entity';
 import { Address } from './address.entity';
 import { AcademicRecord } from './academic-record.entity';
 import { WorkExperience } from './work-experience.entity';
 import { Certification } from './certification.entity';
 import { LanguageSkill } from './language-skill.entity';
+import {
+  Gender,
+  MaritalStatus,
+  Religion,
+  BloodGroup,
+} from '../enums/applicant.enum';
 
-
-export enum Gender {
-  MALE = 'Male',
-  FEMALE = 'Female',
-  NON_BINARY = 'Non-binary',
-  TRANSGENDER = 'Transgender',
-  OTHER = 'Other',
-  PREFER_NOT_TO_SAY = 'Prefer not to say',
-}
-
-export enum MaritalStatus {
-  SINGLE = 'Single',
-  MARRIED = 'Married',
-  DIVORCED = 'Divorced',
-  WIDOWED = 'Widowed',
-  SEPARATED = 'Separated',
-  PREFER_NOT_TO_SAY = 'Prefer not to say',
-}
-
-export enum Religion {
-  ISLAM = 'Islam',
-  HINDUISM = 'Hinduism',
-  CHRISTIANITY = 'Christianity',
-  BUDDHISM = 'Buddhism',
-  JUDAISM = 'Judaism',
-  SIKHISM = 'Sikhism',
-  ATHEIST = 'Atheist',
-  AGNOSTIC = 'Agnostic',
-  OTHER = 'Other',
-  PREFER_NOT_TO_SAY = 'Prefer not to say',
-}
-
-export enum BloodGroup {
-  A_POS = 'A+',
-  A_NEG = 'A-',
-  B_POS = 'B+',
-  B_NEG = 'B-',
-  AB_POS = 'AB+',
-  AB_NEG = 'AB-',
-  O_POS = 'O+',
-  O_NEG = 'O-',
-  UNKNOWN = 'Unknown',
-}
-
-@Entity('user_profiles')
+@Entity('applicant')
 export class Applicant {
   @PrimaryGeneratedColumn('uuid')
-  @ApiProperty()
   id: string;
 
   @Column()
-  @ApiProperty()
+  @ApiProperty({ example: 'Maruf', description: 'First name' })
   @IsString()
   firstName: string;
 
   @Column({ nullable: true })
-  @ApiProperty({ required: false })
+  @ApiProperty({
+    example: 'Islam',
+    required: false,
+    description: 'Middle name',
+  })
   @IsOptional()
   @IsString()
   middleName?: string;
 
   @Column()
-  @ApiProperty()
+  @ApiProperty({ example: 'Billah', description: 'Last name' })
   @IsString()
   lastName: string;
 
   @Column({ nullable: true })
-  @ApiProperty({ required: false })
+  @ApiProperty({
+    example: 'মারুফ ইসলাম বিল্লাহ',
+    required: false,
+    description: 'Full name in native language',
+  })
   @IsOptional()
   @IsString()
   fullNameInNative?: string;
 
   @Column({ type: 'enum', enum: Gender })
-  @ApiProperty({ enum: Gender })
+  @ApiProperty({
+    enum: Gender,
+    example: Gender.MALE,
+    description: 'Gender identity',
+  })
   @IsEnum(Gender)
   gender: Gender;
 
   @Column({ type: 'enum', enum: Religion })
-  @ApiProperty({ enum: Religion })
+  @ApiProperty({
+    enum: Religion,
+    example: Religion.ISLAM,
+    description: 'Religious affiliation',
+  })
   @IsEnum(Religion)
   religion: Religion;
 
   @Column({ type: 'enum', enum: BloodGroup })
-  @ApiProperty({ enum: BloodGroup })
+  @ApiProperty({
+    enum: BloodGroup,
+    example: BloodGroup.B_POS,
+    description: 'Blood group',
+  })
   @IsEnum(BloodGroup)
   bloodGroup: BloodGroup;
 
   @Column()
-  @ApiProperty()
-  @IsDateString()
+  @ApiProperty({
+    example: '1994-10-05T00:00:00.000Z',
+    description: 'Date of birth in ISO format',
+  })
+  @IsISO8601()
   dateOfBirth: string;
 
   @Column()
-  @ApiProperty()
+  @ApiProperty({ example: 'Pabna, Bangladesh', description: 'Place of birth' })
   @IsString()
   placeOfBirth: string;
 
   @Column({ type: 'enum', enum: MaritalStatus })
-  @ApiProperty({ enum: MaritalStatus })
+  @ApiProperty({
+    enum: MaritalStatus,
+    example: MaritalStatus.SINGLE,
+    description: 'Marital status',
+  })
   @IsEnum(MaritalStatus)
   maritalStatus: MaritalStatus;
 
   @Column()
-  @ApiProperty()
+  @ApiProperty({ example: 'Bangladeshi', description: 'Nationality' })
   @IsString()
   nationality: string;
 
   @Column()
-  @ApiProperty()
+  @ApiProperty({ example: '123-456-789', description: 'National ID number' })
   @IsString()
   nationalIdNumber: string;
 
   @Column({ nullable: true })
-  @ApiProperty({ required: false })
+  @ApiProperty({
+    example: 'AB123456',
+    required: false,
+    description: 'Passport number',
+  })
   @IsOptional()
   @IsString()
   passportNumber?: string;
 
   @Column()
-  @ApiProperty()
+  @ApiProperty({ example: 'Mahbub', description: "Father's full name" })
   @IsString()
   fatherName: string;
 
   @Column()
-  @ApiProperty()
+  @ApiProperty({ example: 'Mary', description: "Mother's full name" })
   @IsString()
   motherName: string;
 
   @Column({ unique: true })
-  @ApiProperty()
+  @ApiProperty({
+    example: 'maruf@example.com',
+    description: 'Email address',
+  })
   @IsEmail()
   email: string;
 
   @Column()
-  @ApiProperty()
+  @ApiProperty({ example: '+8801000000000', description: 'Mobile number' })
   @IsString()
   mobileNumber: string;
 
-  @Column(type => EmergencyContact)
+  @OneToOne(() => EmergencyContact, { cascade: true, eager: true })
+  @JoinColumn({ name: 'emergency_contact_id' })
+  @ApiProperty({ type: () => EmergencyContact })
   emergencyContact: EmergencyContact;
 
-  @Column(type => Address)
+  @OneToOne(() => Address, { cascade: true, eager: true })
+  @JoinColumn({ name: 'permanent_address_id' })
+  @ApiProperty({ type: () => Address })
   permanentAddress: Address;
 
-  @Column(type => Address)
+  @OneToOne(() => Address, { cascade: true, eager: true })
+  @JoinColumn({ name: 'present_address_id' })
+  @ApiProperty({ type: () => Address })
   presentAddress: Address;
 
   @Column()
-  @ApiProperty()
+  @ApiProperty({
+    example: 'https://example.com/photo.jpg',
+    description: 'Profile photo URL',
+  })
   @IsString()
   photographUrl: string;
 
   @Column({ type: 'text', nullable: true })
-  @ApiProperty({ required: false })
+  @ApiProperty({
+    example: 'Experienced software engineer...',
+    required: false,
+    description: 'Personal introduction',
+  })
   @IsOptional()
   @IsString()
   introduction?: string;
 
-  @OneToMany(() => AcademicRecord, record => record.applicant, { cascade: true })
+  @OneToMany(() => AcademicRecord, (record) => record.applicant, {
+    cascade: true,
+  })
+  @ApiProperty({
+    type: () => [AcademicRecord],
+    description: 'Academic records',
+  })
   academic: AcademicRecord[];
 
-  @OneToMany(() => WorkExperience, work => work.applicant, { cascade: true })
+  @OneToMany(() => WorkExperience, (work) => work.applicant, { cascade: true })
+  @ApiProperty({
+    type: () => [WorkExperience],
+    description: 'Work experiences',
+  })
   workExperiences: WorkExperience[];
 
-  @OneToMany(() => Certification, cert => cert.applicant, { cascade: true })
+  @OneToMany(() => Certification, (cert) => cert.applicant, { cascade: true })
+  @ApiProperty({ type: () => [Certification], description: 'Certifications' })
   certifications?: Certification[];
 
-  @OneToMany(() => LanguageSkill, lang => lang.applicant, { cascade: true })
+  @OneToMany(() => LanguageSkill, (lang) => lang.applicant, { cascade: true })
+  @ApiProperty({ type: () => [LanguageSkill], description: 'Language skills' })
   languagesSpoken?: LanguageSkill[];
 
-  @Column("simple-array", { nullable: true })
+  @Column('simple-array', { nullable: true })
+  @ApiProperty({
+    example: ['Reading', 'Hiking'],
+    type: [String],
+    required: false,
+    description: 'List of hobbies',
+  })
   hobbies?: string[];
 
-  @Column("simple-array", { nullable: true })
+  @Column('simple-array', { nullable: true })
+  @ApiProperty({
+    example: ['Employee of the Year'],
+    type: [String],
+    required: false,
+    description: 'List of awards',
+  })
   awards?: string[];
 
   @Column()
-  @ApiProperty()
+  @ApiProperty({
+    example: 'ELX-123',
+    description: 'Reference ID from external system',
+  })
   @IsString()
   referencesELXID: string;
 
   @CreateDateColumn()
+  @ApiProperty({
+    example: '2023-01-01T00:00:00.000Z',
+    description: 'Creation timestamp',
+  })
   createdAt: Date;
 
   @UpdateDateColumn()
+  @ApiProperty({
+    example: '2023-01-02T00:00:00.000Z',
+    description: 'Last update timestamp',
+  })
   updatedAt: Date;
 }
-
-// Related entities like AcademicRecord, WorkExperience, etc. should be created
-// as separate files in the same directory: `src/modules/applicant/entities/`

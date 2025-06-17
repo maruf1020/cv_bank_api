@@ -1,15 +1,9 @@
-// src/modules/applicant/entities/certification.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+// src/modules/applicant/dto/certification.dto.ts
+
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, IsISO8601 } from 'class-validator';
-import { Applicant } from './applicant.entity';
+import { IsString, IsOptional, IsISO8601 } from 'class-validator';
 
-@Entity('certifications')
-export class Certification {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @Column()
+export class CertificationDto {
   @ApiProperty({
     example: 'AWS Certified Solutions Architect',
     description: 'Certification title',
@@ -17,7 +11,6 @@ export class Certification {
   @IsString()
   title: string;
 
-  @Column()
   @ApiProperty({
     example: 'Amazon Web Services',
     description: 'Issuing organization',
@@ -25,7 +18,6 @@ export class Certification {
   @IsString()
   issuingOrganization: string;
 
-  @Column()
   @ApiProperty({
     example: '2022-06-01T00:00:00.000Z',
     description: 'Issue date in ISO format',
@@ -33,7 +25,6 @@ export class Certification {
   @IsISO8601()
   issueDate: string;
 
-  @Column({ nullable: true })
   @ApiProperty({
     example: 'https://example.com/credential',
     required: false,
@@ -42,8 +33,4 @@ export class Certification {
   @IsOptional()
   @IsString()
   credentialUrl?: string;
-
-  @ManyToOne(() => Applicant, (user) => user.certifications)
-  @ApiProperty({ type: () => Applicant })
-  applicant: Applicant;
 }

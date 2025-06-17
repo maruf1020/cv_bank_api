@@ -20,6 +20,8 @@ export class ApplicantRepository {
         'workExperiences',
         'certifications',
         'languagesSpoken',
+        'permanentAddress',
+        'presentAddress',
       ],
     });
   }
@@ -36,6 +38,9 @@ export class ApplicantRepository {
         'workExperiences',
         'certifications',
         'languagesSpoken',
+        'emergencyContacts',
+        'permanentAddress',
+        'presentAddress',
       ],
     });
   }

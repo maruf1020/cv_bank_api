@@ -1,20 +1,13 @@
-// src/modules/applicant/entities/academic-record.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+// src/modules/applicant/dto/academic-record.dto.ts
+
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, IsISO8601 } from 'class-validator';
-import { Applicant } from './applicant.entity';
+import { IsString, IsOptional, IsISO8601 } from 'class-validator';
 
-@Entity('academic_records')
-export class AcademicRecord {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @Column()
+export class AcademicRecordDto {
   @ApiProperty({ example: 'Bachelor', description: 'Education level' })
   @IsString()
   level: string;
 
-  @Column()
   @ApiProperty({
     example: 'University of Technology',
     description: 'Educational institution',
@@ -22,7 +15,6 @@ export class AcademicRecord {
   @IsString()
   institute: string;
 
-  @Column({ nullable: true })
   @ApiProperty({
     example: 'Computer Science',
     required: false,
@@ -32,7 +24,6 @@ export class AcademicRecord {
   @IsString()
   department?: string;
 
-  @Column({ nullable: true })
   @ApiProperty({
     example: 'National Education Board',
     required: false,
@@ -42,7 +33,6 @@ export class AcademicRecord {
   @IsString()
   boardOrUniversity?: string;
 
-  @Column()
   @ApiProperty({
     example: '2023-01-01T00:00:00.000Z',
     description: 'Graduation date in ISO format',
@@ -50,12 +40,7 @@ export class AcademicRecord {
   @IsISO8601()
   passingYear: string;
 
-  @Column()
   @ApiProperty({ example: '3.8/4.0', description: 'Academic result' })
   @IsString()
   result: string;
-
-  @ManyToOne(() => Applicant, (user) => user.academic)
-  @ApiProperty({ type: () => Applicant })
-  applicant: Applicant;
 }

@@ -1,24 +1,17 @@
-// src/modules/applicant/entities/address.entity.ts
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+// src/modules/applicant/dto/address.dto.ts
+
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { IsString, IsOptional } from 'class-validator';
 
-@Entity('addresses')
-export class Address {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @Column()
+export class AddressDto {
   @ApiProperty({ example: '123 Main Street', description: 'Street address' })
   @IsString()
   addressLine: string;
 
-  @Column()
   @ApiProperty({ example: 'San Francisco', description: 'City name' })
   @IsString()
   city: string;
 
-  @Column({ nullable: true })
   @ApiProperty({
     example: 'San Francisco County',
     required: false,
@@ -28,7 +21,6 @@ export class Address {
   @IsString()
   district?: string;
 
-  @Column({ nullable: true })
   @ApiProperty({
     example: 'Downtown',
     required: false,
@@ -38,7 +30,6 @@ export class Address {
   @IsString()
   thana?: string;
 
-  @Column({ nullable: true })
   @ApiProperty({
     example: 'California',
     required: false,
@@ -48,7 +39,6 @@ export class Address {
   @IsString()
   stateOrProvince?: string;
 
-  @Column({ nullable: true })
   @ApiProperty({
     example: '94105',
     required: false,
@@ -58,7 +48,6 @@ export class Address {
   @IsString()
   postalCode?: string;
 
-  @Column()
   @ApiProperty({ example: 'United States', description: 'Country name' })
   @IsString()
   country: string;

@@ -1,25 +1,17 @@
-// src/modules/applicant/entities/work-experience.entity.ts
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+// src/modules/applicant/dto/work-experience.dto.ts
+
 import { ApiProperty } from '@nestjs/swagger';
-import { IsOptional, IsString, IsISO8601 } from 'class-validator';
-import { Applicant } from './applicant.entity';
+import { IsString, IsOptional, IsISO8601, IsArray } from 'class-validator';
 
-@Entity('work_experiences')
-export class WorkExperience {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @Column()
+export class WorkExperienceDto {
   @ApiProperty({ example: 'Google LLC', description: 'Company name' })
   @IsString()
   companyName: string;
 
-  @Column()
   @ApiProperty({ example: 'Mountain View, CA', description: 'Office location' })
   @IsString()
   location: string;
 
-  @Column()
   @ApiProperty({
     example: 'Senior Software Engineer',
     description: 'Job title',
@@ -27,7 +19,6 @@ export class WorkExperience {
   @IsString()
   designation: string;
 
-  @Column()
   @ApiProperty({
     example: '2020-01-01T00:00:00.000Z',
     description: 'Start date in ISO format',
@@ -35,7 +26,6 @@ export class WorkExperience {
   @IsISO8601()
   startDate: string;
 
-  @Column({ nullable: true })
   @ApiProperty({
     example: '2023-01-01T00:00:00.000Z',
     required: false,
@@ -45,23 +35,24 @@ export class WorkExperience {
   @IsISO8601()
   endDate?: string;
 
-  @Column('simple-array')
   @ApiProperty({
     example: ['AWS', 'Kubernetes'],
     type: [String],
     description: 'Technologies used',
   })
+  @IsArray()
+  @IsString({ each: true })
   technologiesUsed: string[];
 
-  @Column('simple-array')
   @ApiProperty({
     example: ['JavaScript', 'TypeScript'],
     type: [String],
     description: 'Programming languages used',
   })
+  @IsArray()
+  @IsString({ each: true })
   programmingLanguages: string[];
 
-  @Column('simple-array', { nullable: true })
   @ApiProperty({
     example: ['Led team of 5 developers', 'Implemented CI/CD pipeline'],
     type: [String],
@@ -69,9 +60,7 @@ export class WorkExperience {
     description: 'Job responsibilities',
   })
   @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
   responsibilities?: string[];
-
-  @ManyToOne(() => Applicant, (user) => user.workExperiences)
-  @ApiProperty({ type: () => Applicant })
-  applicant: Applicant;
 }

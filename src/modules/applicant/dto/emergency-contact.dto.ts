@@ -1,24 +1,17 @@
-// src/modules/applicant/entities/emergency-contact.entity.ts
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+// src/modules/applicant/dto/emergency-contact.dto.ts
+
 import { ApiProperty } from '@nestjs/swagger';
 import { IsString } from 'class-validator';
 
-@Entity('emergency_contacts')
-export class EmergencyContact {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
-
-  @Column()
+export class EmergencyContactDto {
   @ApiProperty({ example: 'Jane Smith', description: 'Full name' })
   @IsString()
   name: string;
 
-  @Column()
   @ApiProperty({ example: '+1234567890', description: 'Phone number' })
   @IsString()
   phoneNumber: string;
 
-  @Column()
   @ApiProperty({ example: 'Spouse', description: 'Relationship to applicant' })
   @IsString()
   relationship: string;
