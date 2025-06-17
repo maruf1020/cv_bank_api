@@ -2,6 +2,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,16 +10,27 @@ async function bootstrap() {
   // Enable global validation pipe
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true, // strip away any properties that don't have any decorators
-      forbidNonWhitelisted: true, // throw errors if non-whitelisted values are provided
-      transform: true, // automatically transform payloads to be objects typed according to their DTO classes
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
     }),
   );
+
+  // Swagger configuration
+  const config = new DocumentBuilder()
+    .setTitle('CV Bank API')
+    .setDescription('API documentation for the CV Bank system')
+    .setVersion('1.0')
+    .addBearerAuth() // Adds JWT auth to Swagger UI
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api/docs', app, document);
 
   await app.listen(3000);
 }
 
 bootstrap().catch((error) => {
   console.error('Error during application bootstrap:', error);
-  process.exit(1); // Exit the process with a failure code
+  process.exit(1);
 });

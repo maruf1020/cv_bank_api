@@ -11,6 +11,11 @@ $ docker-compose up -d
 $ docker-compose up
 ```
 
+```
+> net stop winnat
+> net start winnat
+```
+
 ## Project setup
 
 ```bash
