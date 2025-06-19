@@ -6,15 +6,12 @@ import {
   Patch,
   Param,
   Delete,
-  Query,
-  ParseIntPipe,
 } from '@nestjs/common';
 import {
   ApiTags,
   ApiOperation,
   ApiResponse,
   ApiBody,
-  ApiQuery,
   ApiParam,
   ApiBearerAuth,
 } from '@nestjs/swagger';
@@ -22,7 +19,6 @@ import { ApplicantService } from './applicant.service';
 import { CreateApplicantDto } from './dto/create-applicant.dto';
 import { UpdateApplicantDto } from './dto/update-applicant.dto';
 import { Applicant } from './entities/applicant.entity';
-import { PaginatedResult } from '../../common/interfaces/paginated-result.interface';
 
 @ApiTags('Applicants')
 @ApiBearerAuth()
@@ -44,59 +40,15 @@ export class ApplicantController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'Get all applicants with pagination and filtering' })
+  @ApiOperation({ summary: 'Get all applicants' })
   @ApiResponse({
     status: 200,
-    description: 'List of applicants',
-    type: PaginatedResult<Applicant>,
+    description: 'List of all applicants',
+    type: Applicant,
+    isArray: true,
   })
-  @ApiQuery({
-    name: 'search',
-    required: false,
-    description: 'Global search term',
-  })
-  @ApiQuery({
-    name: 'page',
-    required: false,
-    description: 'Page number',
-    type: Number,
-  })
-  @ApiQuery({
-    name: 'limit',
-    required: false,
-    description: 'Items per page',
-    type: Number,
-  })
-  @ApiQuery({
-    name: 'sortField',
-    required: false,
-    description: 'Field to sort by',
-  })
-  @ApiQuery({
-    name: 'sortOrder',
-    required: false,
-    description: 'Sort order (ASC or DESC)',
-    enum: ['ASC', 'DESC'],
-  })
-  // Add more @ApiQuery decorators for each filter parameter
-  findAll(
-    @Query('search') searchTerm?: string,
-    @Query('page', ParseIntPipe) page: number = 1,
-    @Query('limit', ParseIntPipe) limit: number = 10,
-    @Query('sortField') sortField?: string,
-    @Query('sortOrder') sortOrder?: 'ASC' | 'DESC',
-    // Add more query parameters for filters
-  ): Promise<PaginatedResult<Applicant>> {
-    const sort =
-      sortField && sortOrder
-        ? { field: sortField, order: sortOrder }
-        : undefined;
-    return this.applicantService.findAll(
-      searchTerm,
-      {}, // Pass filter object here (you'll need to map query params to filters)
-      sort,
-      { page, limit },
-    );
+  async findAll(): Promise<Applicant[]> {
+    return this.applicantService.findAll();
   }
 
   @Get(':id')

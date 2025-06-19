@@ -1,6 +1,5 @@
 // src/modules/applicant/entities/address.entity.ts
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString } from 'class-validator';
 
 @Entity('addresses')
@@ -9,57 +8,34 @@ export class Address {
   id: string;
 
   @Column()
-  @ApiProperty({ example: '123 Main Street', description: 'Street address' })
   @IsString()
   addressLine: string;
 
   @Column()
-  @ApiProperty({ example: 'San Francisco', description: 'City name' })
   @IsString()
   city: string;
 
   @Column({ nullable: true })
-  @ApiProperty({
-    example: 'San Francisco County',
-    required: false,
-    description: 'District name',
-  })
   @IsOptional()
   @IsString()
   district?: string;
 
   @Column({ nullable: true })
-  @ApiProperty({
-    example: 'Downtown',
-    required: false,
-    description: 'Thana or sub-district',
-  })
   @IsOptional()
   @IsString()
   thana?: string;
 
   @Column({ nullable: true })
-  @ApiProperty({
-    example: 'California',
-    required: false,
-    description: 'State or province',
-  })
   @IsOptional()
   @IsString()
   stateOrProvince?: string;
 
   @Column({ nullable: true })
-  @ApiProperty({
-    example: '94105',
-    required: false,
-    description: 'Postal code',
-  })
   @IsOptional()
   @IsString()
   postalCode?: string;
 
   @Column()
-  @ApiProperty({ example: 'United States', description: 'Country name' })
   @IsString()
   country: string;
 }

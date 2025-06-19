@@ -3,7 +3,6 @@ import { ApplicantRepository } from './repositories/applicant.repository';
 import { CreateApplicantDto } from './dto/create-applicant.dto';
 import { UpdateApplicantDto } from './dto/update-applicant.dto';
 import { Applicant } from './entities/applicant.entity';
-import { PaginatedResult } from '../../common/interfaces/paginated-result.interface';
 
 @Injectable()
 export class ApplicantService {
@@ -18,18 +17,8 @@ export class ApplicantService {
     return this.applicantRepo.create(createDto);
   }
 
-  async findAll(
-    searchTerm?: string,
-    filters?: Record<string, string>,
-    sort?: { field: string; order: 'ASC' | 'DESC' },
-    pagination?: { page: number; limit: number },
-  ): Promise<PaginatedResult<Applicant>> {
-    return this.applicantRepo.searchApplicants(
-      searchTerm,
-      filters,
-      sort,
-      pagination,
-    );
+  async findAll(): Promise<Applicant[]> {
+    return this.applicantRepo.findAll();
   }
 
   async findOne(id: string): Promise<Applicant> {

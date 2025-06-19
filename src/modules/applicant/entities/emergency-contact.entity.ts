@@ -9,17 +9,14 @@ export class EmergencyContact {
   id: string;
 
   @Column()
-  @ApiProperty({ example: 'Jane Smith', description: 'Full name' })
   @IsString()
   name: string;
 
   @Column()
-  @ApiProperty({ example: '+1234567890', description: 'Phone number' })
   @IsString()
   phoneNumber: string;
 
   @Column()
-  @ApiProperty({ example: 'Spouse', description: 'Relationship to applicant' })
   @IsString()
   relationship: string;
 }

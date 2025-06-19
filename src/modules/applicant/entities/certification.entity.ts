@@ -1,6 +1,5 @@
 // src/modules/applicant/entities/certification.entity.ts
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
 import { IsOptional, IsString, IsISO8601 } from 'class-validator';
 import { Applicant } from './applicant.entity';
 
@@ -10,40 +9,22 @@ export class Certification {
   id: string;
 
   @Column()
-  @ApiProperty({
-    example: 'AWS Certified Solutions Architect',
-    description: 'Certification title',
-  })
   @IsString()
   title: string;
 
   @Column()
-  @ApiProperty({
-    example: 'Amazon Web Services',
-    description: 'Issuing organization',
-  })
   @IsString()
   issuingOrganization: string;
 
   @Column()
-  @ApiProperty({
-    example: '2022-06-01T00:00:00.000Z',
-    description: 'Issue date in ISO format',
-  })
   @IsISO8601()
   issueDate: string;
 
   @Column({ nullable: true })
-  @ApiProperty({
-    example: 'https://example.com/credential',
-    required: false,
-    description: 'Credential URL',
-  })
   @IsOptional()
   @IsString()
   credentialUrl?: string;
 
   @ManyToOne(() => Applicant, (user) => user.certifications)
-  @ApiProperty({ type: () => Applicant })
   applicant: Applicant;
 }

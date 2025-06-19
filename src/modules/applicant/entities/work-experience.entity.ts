@@ -10,68 +10,36 @@ export class WorkExperience {
   id: string;
 
   @Column()
-  @ApiProperty({ example: 'Google LLC', description: 'Company name' })
   @IsString()
   companyName: string;
 
   @Column()
-  @ApiProperty({ example: 'Mountain View, CA', description: 'Office location' })
   @IsString()
   location: string;
 
   @Column()
-  @ApiProperty({
-    example: 'Senior Software Engineer',
-    description: 'Job title',
-  })
   @IsString()
   designation: string;
 
   @Column()
-  @ApiProperty({
-    example: '2020-01-01T00:00:00.000Z',
-    description: 'Start date in ISO format',
-  })
   @IsISO8601()
   startDate: string;
 
   @Column({ nullable: true })
-  @ApiProperty({
-    example: '2023-01-01T00:00:00.000Z',
-    required: false,
-    description: 'End date in ISO format',
-  })
   @IsOptional()
   @IsISO8601()
   endDate?: string;
 
   @Column('simple-array')
-  @ApiProperty({
-    example: ['AWS', 'Kubernetes'],
-    type: [String],
-    description: 'Technologies used',
-  })
   technologiesUsed: string[];
 
   @Column('simple-array')
-  @ApiProperty({
-    example: ['JavaScript', 'TypeScript'],
-    type: [String],
-    description: 'Programming languages used',
-  })
   programmingLanguages: string[];
 
   @Column('simple-array', { nullable: true })
-  @ApiProperty({
-    example: ['Led team of 5 developers', 'Implemented CI/CD pipeline'],
-    type: [String],
-    required: false,
-    description: 'Job responsibilities',
-  })
   @IsOptional()
   responsibilities?: string[];
 
   @ManyToOne(() => Applicant, (user) => user.workExperiences)
-  @ApiProperty({ type: () => Applicant })
   applicant: Applicant;
 }
