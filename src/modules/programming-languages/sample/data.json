@@ -1,0 +1,202 @@
+[
+  {
+    "id": 1,
+    "name": "Python",
+    "paradigm": ["Multi-paradigm", "Object-oriented", "Functional", "Imperative"],
+    "created_by": "Guido van Rossum",
+    "logo_url": "https://www.python.org/static/img/python-logo.png",
+    "is_active": true,
+    "description": "High-level interpreted language known for readability and versatility",
+    "use_cases": ["Data Science", "Web Development", "AI/ML", "Automation"]
+  },
+  {
+    "id": 2,
+    "name": "JavaScript",
+    "paradigm": ["Event-driven", "Functional", "Object-oriented"],
+    "created_by": "Brendan Eich",
+    "logo_url": "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png",
+    "is_active": true,
+    "description": "Core web technology for interactive front-end development",
+    "use_cases": ["Web Development", "Mobile Apps", "Server-side", "Game Development"]
+  },
+  {
+    "id": 3,
+    "name": "Java",
+    "paradigm": ["Object-oriented", "Structured", "Imperative"],
+    "created_by": "James Gosling",
+    "logo_url": "https://dev.java/assets/images/java-logo-vert-blk.png",
+    "is_active": true,
+    "description": "Class-based, write-once-run-anywhere language",
+    "use_cases": ["Enterprise Systems", "Android Apps", "Big Data"]
+  },
+  {
+    "id": 4,
+    "name": "C#",
+    "paradigm": ["Object-oriented", "Component-oriented", "Structured"],
+    "created_by": "Microsoft",
+    "logo_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/C_Sharp_wordmark.svg",
+    "is_active": true,
+    "description": "Modern language for .NET ecosystem with strong typing",
+    "use_cases": ["Desktop Apps", "Game Development", "Enterprise Software"]
+  },
+  {
+    "id": 5,
+    "name": "TypeScript",
+    "paradigm": ["Object-oriented", "Functional", "Generic"],
+    "created_by": "Anders Hejlsberg",
+    "logo_url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Typescript_logo_2020.svg",
+    "is_active": true,
+    "description": "Statically typed superset of JavaScript",
+    "use_cases": ["Large-scale Web Apps", "Frontend Frameworks", "Node.js Backends"]
+  },
+  {
+    "id": 6,
+    "name": "C++",
+    "paradigm": ["Procedural", "Object-oriented", "Generic"],
+    "created_by": "Bjarne Stroustrup",
+    "logo_url": "https://upload.wikimedia.org/wikipedia/commons/1/18/ISO_C%2B%2B_Logo.svg",
+    "is_active": true,
+    "description": "High-performance language with low-level memory access",
+    "use_cases": ["System Software", "Game Engines", "High-frequency Trading"]
+  },
+  {
+    "id": 7,
+    "name": "Go",
+    "paradigm": ["Concurrent", "Imperative", "Structured"],
+    "created_by": "Google",
+    "logo_url": "https://go.dev/blog/go-brand/Go-Logo/PNG/Go-Logo_Blue.png",
+    "is_active": true,
+    "description": "Statically typed language with focus on concurrency",
+    "use_cases": ["Cloud Services", "Distributed Systems", "CLI Tools"]
+  },
+  {
+    "id": 8,
+    "name": "Kotlin",
+    "paradigm": ["Object-oriented", "Functional", "Imperative"],
+    "created_by": "JetBrains",
+    "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/74/Kotlin_Icon.png",
+    "is_active": true,
+    "description": "Modern language with null safety and Java interoperability",
+    "use_cases": ["Android Development", "Web Applications", "Server-side"]
+  },
+  {
+    "id": 9,
+    "name": "Rust",
+    "paradigm": ["Concurrent", "Functional", "Imperative"],
+    "created_by": "Graydon Hoare",
+    "logo_url": "https://www.rust-lang.org/logos/rust-logo-512x512.png",
+    "is_active": true,
+    "description": "Memory-safe systems language with zero-cost abstractions",
+    "use_cases": ["System Programming", "WebAssembly", "Embedded Systems"]
+  },
+  {
+    "id": 10,
+    "name": "Swift",
+    "paradigm": ["Protocol-oriented", "Object-oriented", "Functional"],
+    "created_by": "Apple",
+    "logo_url": "https://developer.apple.com/assets/elements/icons/swift/swift-64x64.png",
+    "is_active": true,
+    "description": "Modern language for Apple ecosystem with safety features",
+    "use_cases": ["iOS/macOS Apps", "System Programming", "Server-side"]
+  },
+  {
+    "id": 11,
+    "name": "PHP",
+    "paradigm": ["Imperative", "Object-oriented", "Functional"],
+    "created_by": "Rasmus Lerdorf",
+    "logo_url": "https://www.php.net/images/logos/new-php-logo.svg",
+    "is_active": true,
+    "description": "Server-side scripting language optimized for web development",
+    "use_cases": ["Web Backends", "CMS Development", "E-commerce"]
+  },
+  {
+    "id": 12,
+    "name": "R",
+    "paradigm": ["Functional", "Vectorized", "Object-oriented"],
+    "created_by": "Ross Ihaka & Robert Gentleman",
+    "logo_url": "https://www.r-project.org/logo/Rlogo.svg",
+    "is_active": true,
+    "description": "Language for statistical computing and graphics",
+    "use_cases": ["Data Analysis", "Bioinformatics", "Statistical Modeling"]
+  },
+  {
+    "id": 13,
+    "name": "Dart",
+    "paradigm": ["Object-oriented", "Functional", "Reactive"],
+    "created_by": "Google",
+    "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png",
+    "is_active": true,
+    "description": "Client-optimized language for fast apps on any platform",
+    "use_cases": ["Cross-platform Apps", "Web Development", "Server-side"]
+  },
+  {
+    "id": 14,
+    "name": "Scala",
+    "paradigm": ["Object-oriented", "Functional", "Concurrent"],
+    "created_by": "Martin Odersky",
+    "logo_url": "https://www.scala-lang.org/resources/img/frontpage/scala-spiral.png",
+    "is_active": true,
+    "description": "JVM language combining OOP and functional programming",
+    "use_cases": ["Big Data", "Distributed Systems", "Web Services"]
+  },
+  {
+    "id": 15,
+    "name": "Ruby",
+    "paradigm": ["Object-oriented", "Imperative", "Functional"],
+    "created_by": "Yukihiro Matsumoto",
+    "logo_url": "https://www.ruby-lang.org/images/header-ruby-logo.png",
+    "is_active": true,
+    "description": "Dynamic language focused on simplicity and productivity",
+    "use_cases": ["Web Development", "DevOps", "Scripting"]
+  },
+  {
+    "id": 16,
+    "name": "Lua",
+    "paradigm": ["Scripting", "Imperative", "Functional"],
+    "created_by": "PUC-Rio",
+    "logo_url": "https://www.lua.org/images/lua-logo.gif",
+    "is_active": true,
+    "description": "Lightweight embeddable scripting language",
+    "use_cases": ["Game Development", "Embedded Systems", "Configuration"]
+  },
+  {
+    "id": 17,
+    "name": "SwiftUI",
+    "paradigm": ["Declarative", "Reactive"],
+    "created_by": "Apple",
+    "logo_url": "https://developer.apple.com/assets/elements/icons/swiftui/swiftui-64x64_2x.png",
+    "is_active": true,
+    "description": "Declarative framework for Apple platform UIs",
+    "use_cases": ["iOS/macOS Interfaces", "Cross-platform Apple Apps"]
+  },
+  {
+    "id": 18,
+    "name": "Haskell",
+    "paradigm": ["Functional", "Lazy", "Purely Functional"],
+    "created_by": "Haskell Committee",
+    "logo_url": "https://www.haskell.org/img/haskell-logo.svg",
+    "is_active": true,
+    "description": "Standardized purely functional language",
+    "use_cases": ["Academic Research", "Blockchain", "Financial Systems"]
+  },
+  {
+    "id": 19,
+    "name": "Julia",
+    "paradigm": ["Multi-paradigm", "Functional", "Technical Computing"],
+    "created_by": "Jeff Bezanson, Stefan Karpinski, Viral B. Shah, Alan Edelman",
+    "logo_url": "https://julialang.org/assets/infra/logo.svg",
+    "is_active": true,
+    "description": "High-performance language for scientific computing",
+    "use_cases": ["Numerical Analysis", "Machine Learning", "Parallel Computing"]
+  },
+  {
+    "id": 20,
+    "name": "Perl",
+    "paradigm": ["Multi-paradigm", "Scripting", "Functional"],
+    "created_by": "Larry Wall",
+    "logo_url": "https://upload.wikimedia.org/wikipedia/commons/7/78/Perl-logo-vector.svg",
+    "is_active": true,
+    "description": "Highly capable text processing language",
+    "use_cases": ["System Administration", "Web Development", "Network Programming"]
+  }
+]
