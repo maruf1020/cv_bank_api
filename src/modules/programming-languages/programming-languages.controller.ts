@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { ProgrammingLanguagesService } from './programming-languages.service';
 import { CreateProgrammingLanguageDto } from './dto/create-programming-language.dto';
 import { UpdateProgrammingLanguageDto } from './dto/update-programming-language.dto';
@@ -8,7 +16,9 @@ import { ProgrammingLanguage } from './entities/programming-language.entity';
 @ApiTags('Programming Languages')
 @Controller('programming-languages')
 export class ProgrammingLanguagesController {
-  constructor(private readonly programmingLanguagesService: ProgrammingLanguagesService) {}
+  constructor(
+    private readonly programmingLanguagesService: ProgrammingLanguagesService,
+  ) {}
 
   @ApiOperation({ summary: 'Create a new programming language' })
   @Post()
@@ -18,9 +28,14 @@ export class ProgrammingLanguagesController {
     type: ProgrammingLanguage,
   })
   @ApiResponse({ status: 400, description: 'Bad request' })
-  @ApiResponse({ status: 409, description: 'Programming language already exists' })
+  @ApiResponse({
+    status: 409,
+    description: 'Programming language already exists',
+  })
   create(@Body() createProgrammingLanguageDto: CreateProgrammingLanguageDto) {
-    return this.programmingLanguagesService.create(createProgrammingLanguageDto);
+    return this.programmingLanguagesService.create(
+      createProgrammingLanguageDto,
+    );
   }
 
   @Get()
@@ -34,8 +49,14 @@ export class ProgrammingLanguagesController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateProgrammingLanguageDto: UpdateProgrammingLanguageDto) {
-    return this.programmingLanguagesService.update(+id, updateProgrammingLanguageDto);
+  update(
+    @Param('id') id: string,
+    @Body() updateProgrammingLanguageDto: UpdateProgrammingLanguageDto,
+  ) {
+    return this.programmingLanguagesService.update(
+      +id,
+      updateProgrammingLanguageDto,
+    );
   }
 
   @Delete(':id')

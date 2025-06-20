@@ -11,7 +11,9 @@ describe('ProgrammingLanguagesController', () => {
       providers: [ProgrammingLanguagesService],
     }).compile();
 
-    controller = module.get<ProgrammingLanguagesController>(ProgrammingLanguagesController);
+    controller = module.get<ProgrammingLanguagesController>(
+      ProgrammingLanguagesController,
+    );
   });
 
   it('should be defined', () => {

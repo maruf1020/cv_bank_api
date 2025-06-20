@@ -5,9 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProgrammingLanguage } from './entities/programming-language.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([ProgrammingLanguage]),
-  ],
+  imports: [TypeOrmModule.forFeature([ProgrammingLanguage])],
   controllers: [ProgrammingLanguagesController],
   providers: [ProgrammingLanguagesService],
 })

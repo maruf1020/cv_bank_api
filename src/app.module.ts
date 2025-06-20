@@ -10,7 +10,12 @@ import { ApplicantModule } from './modules/applicant/applicant.module';
 import { ProgrammingLanguagesModule } from './modules/programming-languages/programming-languages.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeOrmConfig), UsersModule, ApplicantModule, ProgrammingLanguagesModule],
+  imports: [
+    TypeOrmModule.forRoot(typeOrmConfig),
+    UsersModule,
+    ApplicantModule,
+    ProgrammingLanguagesModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })

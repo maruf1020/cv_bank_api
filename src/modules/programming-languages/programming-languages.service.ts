@@ -16,7 +16,10 @@ export class ProgrammingLanguagesService {
     return `This action returns a #${id} programmingLanguage`;
   }
 
-  update(id: number, updateProgrammingLanguageDto: UpdateProgrammingLanguageDto) {
+  update(
+    id: number,
+    updateProgrammingLanguageDto: UpdateProgrammingLanguageDto,
+  ) {
     return `This action updates a #${id} programmingLanguage`;
   }
 

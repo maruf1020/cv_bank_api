@@ -9,7 +9,9 @@ describe('ProgrammingLanguagesService', () => {
       providers: [ProgrammingLanguagesService],
     }).compile();
 
-    service = module.get<ProgrammingLanguagesService>(ProgrammingLanguagesService);
+    service = module.get<ProgrammingLanguagesService>(
+      ProgrammingLanguagesService,
+    );
   });
 
   it('should be defined', () => {
