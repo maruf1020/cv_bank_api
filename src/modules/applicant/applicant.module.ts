@@ -25,6 +25,6 @@ import { Address } from './entities/address.entity';
   ],
   controllers: [ApplicantController],
   providers: [ApplicantService, ApplicantRepository],
-  exports: [ApplicantService, ApplicantRepository],
+  // exports: [ApplicantService, ApplicantRepository],
 })
 export class ApplicantModule {}

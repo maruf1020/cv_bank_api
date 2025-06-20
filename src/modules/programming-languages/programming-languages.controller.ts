@@ -2,14 +2,23 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { ProgrammingLanguagesService } from './programming-languages.service';
 import { CreateProgrammingLanguageDto } from './dto/create-programming-language.dto';
 import { UpdateProgrammingLanguageDto } from './dto/update-programming-language.dto';
-import { ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ProgrammingLanguage } from './entities/programming-language.entity';
 
+@ApiTags('Programming Languages')
 @Controller('programming-languages')
 export class ProgrammingLanguagesController {
   constructor(private readonly programmingLanguagesService: ProgrammingLanguagesService) {}
 
   @ApiOperation({ summary: 'Create a new programming language' })
   @Post()
+  @ApiResponse({
+    status: 201,
+    description: 'Programming language created successfully',
+    type: ProgrammingLanguage,
+  })
+  @ApiResponse({ status: 400, description: 'Bad request' })
+  @ApiResponse({ status: 409, description: 'Programming language already exists' })
   create(@Body() createProgrammingLanguageDto: CreateProgrammingLanguageDto) {
     return this.programmingLanguagesService.create(createProgrammingLanguageDto);
   }
