@@ -1,29 +1,71 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { CreateProgrammingLanguageDto } from './dto/create-programming-language.dto';
 import { UpdateProgrammingLanguageDto } from './dto/update-programming-language.dto';
+import { ProgrammingLanguageRepository } from './repositories/programming-languages.repository';
+import { ProgrammingLanguage } from './entities/programming-language.entity';
 
 @Injectable()
 export class ProgrammingLanguagesService {
-  create(createProgrammingLanguageDto: CreateProgrammingLanguageDto) {
-    return 'This action adds a new programmingLanguage';
+  constructor(
+    private readonly ProgrammingLanguageRepository: ProgrammingLanguageRepository,
+  ) {}
+
+  async create(
+    createProgrammingLanguageDto: CreateProgrammingLanguageDto,
+  ): Promise<ProgrammingLanguage> {
+    const existingProgrammingLanguage =
+      await this.ProgrammingLanguageRepository.findByName(
+        createProgrammingLanguageDto.name,
+      );
+    if (existingProgrammingLanguage) {
+      throw new ConflictException('Programming language already exists');
+    }
+    const programmingLanguage = this.ProgrammingLanguageRepository.create(
+      createProgrammingLanguageDto,
+    );
+    return this.ProgrammingLanguageRepository.save(programmingLanguage);
   }
 
-  findAll() {
-    return `This action returns all programmingLanguages`;
+  findAll(): Promise<ProgrammingLanguage[]> {
+    return this.ProgrammingLanguageRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} programmingLanguage`;
+  async findOne(id: string): Promise<ProgrammingLanguage> {
+    const programmingLanguage =
+      await this.ProgrammingLanguageRepository.findById(id);
+    if (!programmingLanguage) {
+      throw new ConflictException(
+        `Programming language with ID ${id} not found`,
+      );
+    }
+    return programmingLanguage;
   }
 
-  update(
-    id: number,
+  async update(
+    id: string,
     updateProgrammingLanguageDto: UpdateProgrammingLanguageDto,
-  ) {
-    return `This action updates a #${id} programmingLanguage`;
+  ): Promise<ProgrammingLanguage> {
+    const programmingLanguage = await this.findOne(id);
+    const updatedProgrammingLanguage = this.ProgrammingLanguageRepository.merge(
+      programmingLanguage,
+      updateProgrammingLanguageDto,
+    );
+    return this.ProgrammingLanguageRepository.save(updatedProgrammingLanguage);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} programmingLanguage`;
+  async remove(id: string): Promise<ProgrammingLanguage> {
+    const programmingLanguage = await this.findOne(id);
+    if (!programmingLanguage) {
+      throw new ConflictException(
+        `Programming language with ID ${id} not found`,
+      );
+    }
+    const deleteResult = await this.ProgrammingLanguageRepository.delete(id);
+    if (deleteResult.affected === 0) {
+      throw new ConflictException(
+        `Programming language with ID ${id} not found`,
+      );
+    }
+    return programmingLanguage;
   }
 }

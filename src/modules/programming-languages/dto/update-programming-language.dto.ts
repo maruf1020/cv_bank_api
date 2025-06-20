@@ -1,5 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CreateProgrammingLanguageDto } from './create-programming-language.dto';
+import { IsOptional, IsString, IsBoolean } from 'class-validator';
 
 export class UpdateProgrammingLanguageDto extends PartialType(
   CreateProgrammingLanguageDto,
@@ -9,19 +10,24 @@ export class UpdateProgrammingLanguageDto extends PartialType(
     description: 'Unique identifier for the programming language',
     required: true,
   })
+  @IsString()
   id: string;
 
   @ApiProperty({
     example: 'Python',
     description: 'Name of the programming language',
-    required: true,
+    required: false,
   })
-  name: string;
+  @IsString()
+  @IsOptional()
+  name?: string;
 
   @ApiProperty({
     example: true,
     description: 'Indicates if the programming language is currently active',
-    required: true,
+    required: false,
   })
-  isActive: boolean;
+  @IsBoolean()
+  @IsOptional()
+  isActive?: boolean;
 }

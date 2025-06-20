@@ -1,5 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsArray, IsOptional } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateProgrammingLanguageDto {
   @ApiProperty({
@@ -7,6 +13,8 @@ export class CreateProgrammingLanguageDto {
     description: 'Name of the programming language',
     required: true,
   })
+  @IsString()
+  @IsNotEmpty()
   name: string;
 
   @ApiProperty({
@@ -14,6 +22,7 @@ export class CreateProgrammingLanguageDto {
     description: 'Name of the person who created this entry',
     required: false,
   })
+  @IsString()
   @IsOptional()
   createdBy?: string;
 
@@ -23,6 +32,7 @@ export class CreateProgrammingLanguageDto {
     description: 'Description of the programming language',
     required: false,
   })
+  @IsString()
   @IsOptional()
   description?: string;
 
@@ -31,6 +41,7 @@ export class CreateProgrammingLanguageDto {
     description: 'URL of the programming language logo',
     required: false,
   })
+  @IsString()
   @IsOptional()
   logoUrl?: string;
 
@@ -59,5 +70,6 @@ export class CreateProgrammingLanguageDto {
     description: 'Indicates if the programming language is currently active',
     required: true,
   })
+  @IsBoolean()
   isActive: boolean;
 }

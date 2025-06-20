@@ -19,6 +19,10 @@ export class ProgrammingLanguageRepository {
     return this.repository.findOne({ where: { id: id } });
   }
 
+  async findByName(name: string): Promise<ProgrammingLanguage | null> {
+    return this.repository.findOne({ where: { name: name } });
+  }
+
   create(
     createProgrammingLanguageDto: CreateProgrammingLanguageDto,
   ): ProgrammingLanguage {
@@ -38,7 +42,7 @@ export class ProgrammingLanguageRepository {
     return this.repository.merge(programmingLanguage, partialEntity);
   }
 
-  async delete(id: number): Promise<DeleteResult> {
+  async delete(id: string): Promise<DeleteResult> {
     return this.repository.delete(id);
   }
 }

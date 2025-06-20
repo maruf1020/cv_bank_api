@@ -3,10 +3,11 @@ import { ProgrammingLanguagesService } from './programming-languages.service';
 import { ProgrammingLanguagesController } from './programming-languages.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ProgrammingLanguage } from './entities/programming-language.entity';
+import { ProgrammingLanguageRepository } from './repositories/programming-languages.repository';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ProgrammingLanguage])],
   controllers: [ProgrammingLanguagesController],
-  providers: [ProgrammingLanguagesService],
+  providers: [ProgrammingLanguagesService, ProgrammingLanguageRepository],
 })
 export class ProgrammingLanguagesModule {}

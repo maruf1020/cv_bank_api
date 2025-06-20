@@ -44,8 +44,8 @@ export class ProgrammingLanguagesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.programmingLanguagesService.findOne(+id);
+  findOne(@Param('string') id: string) {
+    return this.programmingLanguagesService.findOne(id);
   }
 
   @Patch(':id')
@@ -54,13 +54,13 @@ export class ProgrammingLanguagesController {
     @Body() updateProgrammingLanguageDto: UpdateProgrammingLanguageDto,
   ) {
     return this.programmingLanguagesService.update(
-      +id,
+      id,
       updateProgrammingLanguageDto,
     );
   }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.programmingLanguagesService.remove(+id);
+    return this.programmingLanguagesService.remove(id);
   }
 }
