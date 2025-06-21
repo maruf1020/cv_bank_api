@@ -5,7 +5,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class ProgrammingLanguage {
   @ApiProperty({
-    example: 'd1f2e3a4-b5c6-7d8e-9f0g-1h2i3j4k5l6m',
+    example: '123e4567-e89b-12d3-a456-426614174000',
     description: 'Unique identifier for the programming language',
     required: true,
     type: String,

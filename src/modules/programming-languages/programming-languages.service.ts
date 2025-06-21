@@ -55,17 +55,7 @@ export class ProgrammingLanguagesService {
 
   async remove(id: string): Promise<ProgrammingLanguage> {
     const programmingLanguage = await this.findOne(id);
-    if (!programmingLanguage) {
-      throw new ConflictException(
-        `Programming language with ID ${id} not found`,
-      );
-    }
-    const deleteResult = await this.ProgrammingLanguageRepository.delete(id);
-    if (deleteResult.affected === 0) {
-      throw new ConflictException(
-        `Programming language with ID ${id} not found`,
-      );
-    }
+    await this.ProgrammingLanguageRepository.delete(id);
     return programmingLanguage;
   }
 }
